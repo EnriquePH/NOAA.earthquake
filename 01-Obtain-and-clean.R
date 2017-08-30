@@ -10,9 +10,9 @@ eq_download_data <- function(destfile, data_path) {
     "type_0=Exact&query_0=$ID&t=101650&s=13&d=189&dfn=",
     "signif.txt"
   )
-  
+
   dir.create(data_path, showWarnings = FALSE)
-  
+
   dest_path <- paste0(data_path, "/", destfile)
   if(!file.exists(dest_path)) {
     utils::download.file(url = noaa_url,
@@ -55,13 +55,13 @@ eq_read_raw_data <- function(destfile, data_path) {
   }
 
 eq_clean_data <- function(df) {
-  df %>% 
+  df %>%
     dplyr::mutate(DATE = ~lubridate::ymd(paste0(YEAR, MONTH, DAY)))
 }
 
 
-data_path <- "data"
-dest_file <- "noaa_data.txt"
+data_path <- "inst/extdata"
+dest_file <- "noaa_earthquake.txt"
 
 eq_download_data(destfile = dest_file,
                  data_path = data_path)
@@ -72,23 +72,23 @@ eq_df <- eq_read_raw_data(destfile = dest_file,
 
 eq_df <- eq_clean_data(eq_df)
 
-#eq_location_clean 
+#eq_location_clean
 
 
-eq_df$LOCATION_NAME <- mapply(function(x, y) gsub(x, "", y), 
-                              eq_df$COUNTRY, 
+eq_df$LOCATION_NAME <- mapply(function(x, y) gsub(x, "", y),
+                              eq_df$COUNTRY,
                               eq_df$LOCATION_NAME) %>%
   gsub("BRITIAN", "BRITAIN", .) %>%
   gsub("^(:|;|-|,)\\s", "", .) %>%
   gsub("^(-|:)", "", .) %>%
   trimws %>%
-  gsub("(,|:|\\.)$", "", .) %>% 
+  gsub("(,|:|\\.)$", "", .) %>%
   gsub("-:", "", .) %>%
   gsub("\\[", "(", .) %>%
   gsub("\\]", ")", .) %>%
   gsub(": :", ":", .) %>%
-  stringr::str_to_title(.) 
-  
+  stringr::str_to_title(.)
+
 
 View(eq_df)
 

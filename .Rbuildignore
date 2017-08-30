@@ -1,2 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^Instructions\.Rmd$
+^Instructions\.html$
+^01-Obtain-and-clean\.R$
+^img$
+^Readme\.md$
