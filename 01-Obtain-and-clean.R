@@ -2,26 +2,7 @@ library(readr)
 library(dplyr)
 library(lubridate)
 library(magrittr)
-
-eq_download_data <- function(destfile, data_path) {
-  # https://www.ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1
-  noaa_url <- paste0(
-    "https://www.ngdc.noaa.gov/nndc/struts/results?" ,
-    "type_0=Exact&query_0=$ID&t=101650&s=13&d=189&dfn=",
-    "signif.txt"
-  )
-
-  dir.create(data_path, showWarnings = FALSE)
-
-  dest_path <- paste0(data_path, "/", destfile)
-  if(!file.exists(dest_path)) {
-    utils::download.file(url = noaa_url,
-                destfile = dest_path)
-    cat(paste("Data has been downloaded: ", dest_path, "\n"))
-  } else {
-    warning(paste("File ", dest_path, " already exists"))
-  }
-}
+library(NOAA.earthquake)
 
 
 eq_read_raw_data <- function(destfile, data_path) {
@@ -33,6 +14,9 @@ eq_read_raw_data <- function(destfile, data_path) {
            col_types = list(
              .default = col_integer(),
              FLAG_TSUNAMI = col_character(),
+             YEAR = col_integer(),
+             MONTH = col_integer(),
+             DAY = col_integer(),
              SECOND = col_character(),
              EQ_PRIMARY = col_double(),
              EQ_MAG_MW = col_double(),
@@ -54,11 +38,26 @@ eq_read_raw_data <- function(destfile, data_path) {
            ))
   }
 
+
+#' Title
+#'
+#' @param df
+#'
+#' @return
+#' @export
+#'
+#' @examples
 eq_clean_data <- function(df) {
   df %>%
-    dplyr::mutate(DATE = ~lubridate::ymd(paste0(YEAR, MONTH, DAY)))
+    #tidyr::replace_na(replace = list(MONTH = 1, DAY = 1)) %>%
+    dplyr::mutate(DATE =
+                    lubridate::ymd(paste(YEAR, MONTH, DAY, sep = "/"),
+                                   truncated = 2)) %>%
+    dplyr::mutate(FLAG_TSUNAMI = ifelse(is.na(FLAG_TSUNAMI), FALSE, TRUE))
 }
 
+
+#-------------------------------------------------------------------------------
 
 data_path <- "inst/extdata"
 dest_file <- "noaa_earthquake.txt"
@@ -70,7 +69,11 @@ eq_df <- eq_read_raw_data(destfile = dest_file,
                   data_path = data_path)
 
 
+
 eq_df <- eq_clean_data(eq_df)
+
+
+View(eq_df)
 
 #eq_location_clean
 
@@ -92,4 +95,18 @@ eq_df$LOCATION_NAME <- mapply(function(x, y) gsub(x, "", y),
 
 View(eq_df)
 
-gsub(": :", ":","Balkans Nw: : Stobi")
+
+
+x <- c("0057-1-1", "09-01-02", "09-01-03", )
+ymd(x)
+
+
+dates <- c("02/27/0092", "02/27/92", "01/14/92", "02/28/92", "02/01/92")
+as.Date(dates, "%m/%d/%y")
+
+ymd(c("2010"), truncated = 2)
+
+
+sprintf("%04d", 57)
+
+lubridate::ymd(paste("2011", NA, NA, sep = "/"), truncated = 2)

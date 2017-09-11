@@ -7,9 +7,8 @@
 
 ## Description 
 
-This capstone project will be centered around a dataset obtained from the U.S.
-National Oceanographic and Atmospheric Administration (NOAA) on significant
-earthquakes around the world.
+The R package visualizes and maps NOAA earthquake database.
+
 
 ## Installation
 
@@ -17,3 +16,10 @@ earthquakes around the world.
 library(devtools)
 devtools::install_github("EnriquePH/NOAA.earthquake")
 ```
+
+## License
+MIT License (MIT)
+
+## Links
+
+* [NOAA Earthquake database](https://www.ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1)
