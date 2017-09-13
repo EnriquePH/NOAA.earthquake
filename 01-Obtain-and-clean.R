@@ -1,10 +1,20 @@
 library(readr)
 library(dplyr)
-library(lubridate)
+library(tidyr)
+library(chron)
 library(magrittr)
 library(NOAA.earthquake)
 
 
+#' Title
+#'
+#' @param destfile
+#' @param data_path
+#'
+#' @return
+#' @export
+#'
+#' @examples
 eq_read_raw_data <- function(destfile, data_path) {
   raw_file <- paste0(data_path, "/", dest_file)
   readr::read_delim(raw_file,
@@ -49,13 +59,19 @@ eq_read_raw_data <- function(destfile, data_path) {
 #' @examples
 eq_clean_data <- function(df) {
   df %>%
-    #tidyr::replace_na(replace = list(MONTH = 1, DAY = 1)) %>%
-    dplyr::mutate(DATE =
-                    lubridate::ymd(paste(YEAR, MONTH, DAY, sep = "/"),
-                                   truncated = 2)) %>%
+    tidyr::replace_na(replace = list(MONTH = 1, DAY = 1)) %>%
+    dplyr::mutate(DATE = as.Date(base::julian(DAY, MONTH, YEAR),
+                                 origin = "1970/01/01")) %>%
     dplyr::mutate(FLAG_TSUNAMI = ifelse(is.na(FLAG_TSUNAMI), FALSE, TRUE))
 }
 
+
+# library("chron")
+# as.Date(chron::julian(1, 1, -1970), origin = "1970/01/01")
+
+# library(dplyr)
+# df <- tibble(x = c(1, 2, NA), y = c("a", NA, "b"))
+# df %>% replace_na(list(x = 0, y = "unknown"))
 
 #-------------------------------------------------------------------------------
 
@@ -97,7 +113,7 @@ View(eq_df)
 
 
 
-x <- c("0057-1-1", "09-01-02", "09-01-03", )
+x <- c("0057-1-1", "09-01-02", "09-01-03")
 ymd(x)
 
 
