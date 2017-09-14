@@ -5,7 +5,7 @@
 #' @param data_path A string with the data path
 #'
 #' @return None
-#'
+#' @importFrom utils download.file
 #' @references \url{https://www.ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1}
 #' @references \url{http://www.noaa.gov/}
 #' @seealso \code{\link[utils]{download.file}}

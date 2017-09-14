@@ -49,25 +49,16 @@ eq_read_raw_data <- function(destfile, data_path) {
   }
 
 
-#' Title
-#'
-#' @param df
-#'
-#' @return
-#' @export
-#'
-#' @examples
-eq_clean_data <- function(df) {
-  df %>%
-    tidyr::replace_na(replace = list(MONTH = 1, DAY = 1)) %>%
-    dplyr::mutate(DATE = as.Date(base::julian(DAY, MONTH, YEAR),
-                                 origin = "1970/01/01")) %>%
-    dplyr::mutate(FLAG_TSUNAMI = ifelse(is.na(FLAG_TSUNAMI), FALSE, TRUE))
-}
+
 
 
 # library("chron")
-# as.Date(chron::julian(1, 1, -1970), origin = "1970/01/01")
+x <- as.numeric(as.Date(julian(1, 1, 0),
+                        origin = as.Date("1970-01-01")))
+y <- as.numeric(as.Date(chron:::julian.default(12, 31, -1),
+                         origin = as.Date("1970-01-01")))
+#
+x -y
 
 # library(dplyr)
 # df <- tibble(x = c(1, 2, NA), y = c("a", NA, "b"))

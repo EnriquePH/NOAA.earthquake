@@ -31,5 +31,5 @@ eq_download_data(destfile = dest_file, data_path = data_path)
 \url{http://www.noaa.gov/}
 }
 \seealso{
-\code{\link[=utils]{download.file}}
+\code{\link[utils]{download.file}}
 }
