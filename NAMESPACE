@@ -2,7 +2,12 @@
 
 export(eq_clean_data)
 export(eq_download_data)
+export(eq_read_raw_data)
 importFrom(dplyr,mutate)
 importFrom(magrittr,"%>%")
+importFrom(readr,col_character)
+importFrom(readr,col_double)
+importFrom(readr,col_integer)
+importFrom(readr,read_delim)
 importFrom(tidyr,replace_na)
 importFrom(utils,download.file)

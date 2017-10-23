@@ -28,13 +28,14 @@ eq_clean_data <- function(df) {
   LATITUDE <- NULL
   LONGITUDE <- NULL
   FLAG_TSUNAMI <- NULL
+  DATE <- NULL
 
   df %>%
     # Replace missing dates to first and January
     tidyr::replace_na(replace = list(MONTH = 1, DAY = 1)) %>%
     # Convert mm/dd/+yyyy to Date
-    dplyr::mutate(DATE = as.Date(julian(MONTH, DAY, YEAR),
-                                 origin = as.Date("1970-01-01"))) %>%
+    dplyr::mutate(DATE = as.Date(chron:::julian.default(MONTH, DAY, YEAR),
+                                 origin = "1970-01-01")) %>%
     # Convert lat and long.
     dplyr::mutate(LATITUDE = as.numeric(LATITUDE)) %>%
     dplyr::mutate(LONGITUDE = as.numeric(LONGITUDE)) %>%

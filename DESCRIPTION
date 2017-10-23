@@ -1,7 +1,7 @@
 Package: NOAA.earthquake
 Type: Package
 Title: Visualize and map NOAA earthquake database
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Enrique", "Pérez Herrero",
     email = "eph.project1500@gmail.com",
     role = c("aut", "cre", "cph"))
@@ -13,8 +13,9 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 Imports:
- magrittr,
    utils,
    dplyr,
    tidyr,
-   readr
+   readr,
+   magrittr,
+   chron
