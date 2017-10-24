@@ -14,10 +14,13 @@ eq_df <- eq_read_raw_data(file_path)
 
 eq_df <- eq_clean_data(eq_df)
 
+eq_df <- eq_location_clean(eq_df)
 
 View(eq_df)
 
 summary(eq_df)
+
+unique(eq_df$COUNTRY)
 
 #eq_location_clean
 

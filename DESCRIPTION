@@ -18,4 +18,5 @@ Imports:
    tidyr,
    readr,
    magrittr,
-   chron
+   chron,
+   stringr
