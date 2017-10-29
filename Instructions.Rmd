@@ -113,6 +113,7 @@ readr::read_delim("earthquakes.tsv.gz", delim = "\t") %>%
 
 Which should produce the following result:
 
+![](https://raw.githubusercontent.com/EnriquePH/NOAA.earthquake/master/img/week3-img1.png)
 
 This is just an image, of course your result will be a fully interactive map.
 
@@ -136,6 +137,10 @@ readr::read_delim("earthquakes.tsv.gz", delim = "\t") %>%
   eq_map(annot_col = "popup_text")
 ```
 
+Which should produce the following result:
+
+![](https://raw.githubusercontent.com/EnriquePH/NOAA.earthquake/master/img/week3-img2.png)
+
 Again we're only able to show an image here but your result should be a fully
 interactive map.
 
@@ -144,16 +149,16 @@ interactive map.
 
 ### Documentation and Packaging Tasks
 
-Documentation is one of the most important and most commonly overlooked steps
+Documentation is one of the most important and most commonly overlooked steps 
 when writing software. You might be creating a revolutionary R package with code
-that is brilliantly implemented, but without clear and accessible documentation
-nobody will be able to use your package! In R packages there are two primary
-levels of documentation, the help files for individual functions and a vignette
-which contains a detailed explanation of how the package should be used,
-including examples featuring each function in the package. You should also
-consider writing a useful README.md file for your package so that when new users
-visit your package's GitHub repository they can quickly get the gist of how your
-package works.
+that is brilliantly implemented, but without clear and accessible documentation 
+nobody will be able to use your package! In R packages there are two primary 
+levels of documentation, the __help files__ for individual functions and a
+__vignette__ which contains a detailed explanation of how the package should be
+used, including examples featuring each function in the package. You should also
+consider writing a useful __README.md__ file for your package so that when new
+users visit your package's GitHub repository they can quickly get the gist of
+how your package works.
 
 In this module you should make sure to do the following:
 
@@ -166,9 +171,9 @@ documentation, including an example use for every function.
 for your package and how it could be used. The vignette should include examples
 for every function that is exported in the package's NAMESPACE file.
 
-When you're finished with these tasks commit the changes to your package to
-GitHub so that you can show your package to your fellow students in the peer
-assessments.
+When you're finished with these tasks commit the changes to your package to 
+[GitHub](https://github.com/) so that you can show your package to your fellow
+students in the peer assessments.
 
 
 ### Testing
@@ -196,9 +201,10 @@ tests!
 
 In this module you should do the following:
 
-Create a GitHub repository for your package and push your package code to
-GitHub. Configure Travis CI so that it tests your R package. You'll need to add
-a .travis.yml file to your package. Once you have Travis set up add your package repository's Travis badge to your package's README.md file. Make sure your
+Create a GitHub repository for your package and push your package code to 
+GitHub. Configure Travis CI so that it tests your R package. You'll need to add 
+a .travis.yml file to your package. Once you have Travis set up add your package
+repository's Travis badge to your package's __README.md__ file. Make sure your 
 package is building on Travis without any errors, warnings, or notes.
 
 
